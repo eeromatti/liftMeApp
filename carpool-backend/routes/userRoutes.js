@@ -1,81 +1,86 @@
-const express = require("express");
+const express = require('express')
 const User = require('../models/User')
 const findDistance = require('../services/findDistance')
 const findMatches = require('../services/findMatches')
 
-const router = express.Router();
+const userRouter = express.Router()
 
 // find all users
-router.get("/", async (req, res) => {
-    try {
-      const users = await User.find();
-      res.json(users);
-    } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  });
-
-// find user by id
-router.get("/:id", async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ error: "User not found" });
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-// update user information
-router.put("/:id", async (req, res) => {
-    try {
-      const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-      if (!user) return res.status(404).json({ error: "User not found" });
-      res.json({ message: "User updated", user });
-    } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  });
-
-// update matches
-router.put("/matches/:id", async (req, res) => {
-    try {
-        const response = await findMatches(req.params.id, { new: true });
-        const user = await User.findByIdAndUpdate(req.params.id, response, { new: true })
-        res.json({ message: "User updated", user });
-
-    } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" });
-    }
+userRouter.get('/', async (req, res) => {
+  const users = await User.find({})
+  res.json(users)
 })
 
-// create an user
-router.post("/", async (req, res) => {
-try {
-    const { name, home, work, role, distance, drivers, passengers } = req.body;
 
-    const start = home.join(",")
-    const end = work.join(",")
-    let dis = await findDistance(start, end)
+// find user by id
+userRouter.get('/:id', async (req, res) => {
+  const user = await User.findById(req.params.id)
+  if (user) 
+    res.json(user)
+  else {
+    res.status(404).json()
+  } 
+})
+
+
+// update user information
+userRouter.put('/:id', async (req, res) => {  
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  if (user) {
+    res.json({ message: 'User updated', user })    
+  } else {
+    res.status(404).json()
+  }
+})
+
+
+// update matches
+userRouter.put('/matches/:id', async (req, res) => {
+  // does user exist
+  const user = await User.findById(req.params.id)
+  if (!user) {
+    res.json()
+  } 
+
+  // find matches
+  const matches = await findMatches(req.params.id, { new: true })
+  if (matches) {
     
-    const user = new User({ name, home, work, role, dis, drivers, passengers });
-    await user.save();
-    res.status(201).json({ message: "User created!", name });
-} catch (error) {
-    res.status(400).json({ error: error.message });
-}
-});
+    // update user
+    const newUser = await User.findByIdAndUpdate(req.params.id, matches, { new: true })
+    if (newUser) {
+      res.json({ message: 'User updated', user })
+    } 
+  }
+})
+
+
+// create an user
+userRouter.post('/', async (req, res) => {
+  const { name, home, work, role, drivers, passengers } = req.body
+
+  // find the commuting distance
+  let dis = await findDistance(home, work)
+
+  const user = new User({ name, home, work, role, dis, drivers, passengers })
+  if (user) {
+    await user.save()
+    res.status(201).json({ message: 'User created!', name })
+  } else {
+    res.status(400).json()
+  }   
+})
+
 
 // delete an user
-router.delete("/:id", async (req, res) => {
-    try {
-        const user = await User.deleteOne({ _id: req.params.id });
-        if (!user) return res.status(404).json({ error: "User not found" });
-        res.json({ message: "User deleted", user });
-    } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-});
+userRouter.delete('/:id', async (req, res) => {  
+  const user = await User.deleteOne({ _id: req.params.id })
+  if (user) {
+    res.json({ message: 'User deleted', user })
+  } else {
+    res.json()
+  }
+})
 
 
-module.exports = router;  
+module.exports = userRouter

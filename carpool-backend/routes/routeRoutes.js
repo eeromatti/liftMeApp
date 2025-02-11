@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express')
 const { saveUserRoutePoints, findMatches } = require('../controllers/routesController')
 
-const router = express.Router();
+const router = express.Router()
 
-router.get("/route/:id", saveUserRoutePoints); 
-router.put("/find", findMatches);
+router.get('/route/:id', saveUserRoutePoints) 
+router.put('/find', findMatches)
 
 
-module.exports = router;  
+module.exports = router  
