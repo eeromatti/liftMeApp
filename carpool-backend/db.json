@@ -1,8 +1,22 @@
 {
   "users": [
     {
-      "name": "testaaja",
-      "id": "6aabb33c-0bee-4d72-9a5d-289a710ed6e3"
+      "id": "6aabb33c-0bee-4d72-9a5d-289a710ed6e3",
+      "name": "Lahden Late",
+      "home": [
+        25.657571,
+        61.025878
+      ],
+      "work": [
+        24.951129,
+        60.297889
+      ],
+      "role": [
+        "driver"
+      ],
+      "distance": 105000,
+      "drivers": [],
+      "passengers": []
     },
     {
       "id": "6b5e6566-6d8e-4ef6-82fa-11bde3a52a8f",
@@ -60,6 +74,28 @@
       "distance": 13600,
       "drivers": [],
       "passengers": []
+    },
+    {
+      "name": "testaaja",
+      "home": [
+        25.123123,
+        60.835073
+      ],
+      "work": [
+        24.951129,
+        60.297889
+      ],
+      "role": [
+        "driver",
+        "passenger"
+      ],
+      "distance": 13600,
+      "drivers": [
+        "sepi",
+        "leka"
+      ],
+      "passengers": [],
+      "id": "1"
     }
   ]
 }

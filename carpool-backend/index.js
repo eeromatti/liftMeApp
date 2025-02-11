@@ -3,7 +3,7 @@ const config = require('./utils/config')
 
 
 app.listen(config.PORT, () => {
-    console.log(`App is listening on port ${config.PORT}`)
+  console.log(`App is listening on port ${config.PORT}`)
 })
 
 // app.listen(3000, () => {
