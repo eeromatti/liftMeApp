@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require('cors')
+// const { App } = require('@slack/bolt')
+
 const mongoose = require('mongoose')
 require('express-async-errors')
 
@@ -8,7 +10,7 @@ const logger = require('./utils/logger')
 
 const config = require('./utils/config')
 const userRouter = require('./routes/userRoutes') 
-const routeRouter = require('./routes/routeRoutes')
+// const routeRouter = require('./routes/routeRoutes')
 
 //connect to db
 mongoose.set('strictQuery', false)
@@ -22,19 +24,19 @@ mongoose.connect(config.MONGODB_URI)
     logger.error('error connection to MongoDB:', error.message)
   })
 
-const app = express()
+const expressApp = express()
 
 //middlewares 
-app.use(cors())
-app.use(express.json())
-app.use(middleware.requestLogger)
+expressApp.use(cors())
+expressApp.use(express.json())
+expressApp.use(middleware.requestLogger)
 
 //routes
-app.use('/api/users', userRouter) 
-app.use('/api/routes', routeRouter)
+expressApp.use('/api/users', userRouter) 
+// expressApp.use('/api/routes', routeRouter)
 
 //middlewares
-app.use(middleware.unknownEndpoint)
-app.use(middleware.errorHandler)
+expressApp.use(middleware.unknownEndpoint)
+expressApp.use(middleware.errorHandler)
 
-module.exports = app
+module.exports = expressApp

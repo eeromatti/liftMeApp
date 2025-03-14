@@ -13,8 +13,8 @@
   "description": "",
   "dependencies": {
     "@slack/bolt": "^4.2.0",
-    "assert": "^2.1.0",
     "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^5.0.1",
     "json-server": "^1.0.0-beta.3",
@@ -27,7 +27,6 @@
     "@stylistic/eslint-plugin-js": "^3.1.0",
     "eslint": "^9.20.0",
     "eslint-plugin-react": "^7.37.4",
-    "globals": "^15.14.0",
-    "supertest": "^7.0.0"
+    "globals": "^15.14.0"
   }
 }

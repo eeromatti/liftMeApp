@@ -14,7 +14,6 @@
       "role": [
         "driver"
       ],
-      "distance": 105000,
       "drivers": [],
       "passengers": []
     },
@@ -33,7 +32,6 @@
         "driver",
         "passenger"
       ],
-      "distance": 54300,
       "drivers": [],
       "passengers": []
     },
@@ -52,7 +50,6 @@
         "driver",
         "passenger"
       ],
-      "distance": 19600,
       "drivers": [],
       "passengers": []
     },
@@ -71,7 +68,6 @@
         "driver",
         "passenger"
       ],
-      "distance": 13600,
       "drivers": [],
       "passengers": []
     },
@@ -89,7 +85,6 @@
         "driver",
         "passenger"
       ],
-      "distance": 13600,
       "drivers": [
         "sepi",
         "leka"
