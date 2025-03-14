@@ -1,4 +1,5 @@
 const express = require('express')
+<<<<<<< HEAD
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
@@ -7,6 +8,11 @@ const findMatchesById = require('../services/findMatchesById')
 const findMatchesByBody = require('../services/findMatchesByBody')
 const config = require('../utils/config')
 // const addressToCoordinates = require('../services/addressToCoordinates')
+=======
+const User = require('../models/User')
+const findDistance = require('../services/findDistance')
+const findMatches = require('../services/findMatches')
+>>>>>>> 8325f8ade864eee6e7af0bc46d995d5e52c6960b
 
 const userRouter = express.Router()
 
@@ -39,6 +45,7 @@ userRouter.put('/:id', async (req, res) => {
 })
 
 
+<<<<<<< HEAD
 // update matches by id
 userRouter.put('/matches/:id', async (req, res) => {
   try {
@@ -66,11 +73,31 @@ userRouter.put('/matches/:id', async (req, res) => {
   } catch (error) {
     console.error('Error in updating matches:', error)
     res.status(500).json({ message: 'Internal server error' })
+=======
+// update matches
+userRouter.put('/matches/:id', async (req, res) => {
+  // does user exist
+  const user = await User.findById(req.params.id)
+  if (!user) {
+    res.json()
+  } 
+
+  // find matches
+  const matches = await findMatches(req.params.id, { new: true })
+  if (matches) {
+    
+    // update user
+    const newUser = await User.findByIdAndUpdate(req.params.id, matches, { new: true })
+    if (newUser) {
+      res.json({ message: 'User updated', user })
+    } 
+>>>>>>> 8325f8ade864eee6e7af0bc46d995d5e52c6960b
   }
 })
 
 
 // create an user
+<<<<<<< HEAD
 userRouter.post('/signup', async (req, res) => {
   const { name, email, role, homeAddress, homeCoordinates, workAddress, workCoordinates, password, activeDays} = req.body
 
@@ -108,6 +135,15 @@ userRouter.post('/signup', async (req, res) => {
       activeDays
     })
 
+=======
+userRouter.post('/', async (req, res) => {
+  const { name, home, work, role, drivers, passengers } = req.body
+
+  // find the commuting distance
+  let dis = await findDistance(home, work)
+
+  const user = new User({ name, home, work, role, dis, drivers, passengers })
+>>>>>>> 8325f8ade864eee6e7af0bc46d995d5e52c6960b
   if (user) {
     await user.save()
     res.status(201).json({ message: 'User created!', name })
@@ -116,6 +152,7 @@ userRouter.post('/signup', async (req, res) => {
   }   
 })
 
+<<<<<<< HEAD
 // login
 userRouter.post('/login', async (req, res) => {
   // console.log('login router vastaa')
@@ -145,6 +182,8 @@ userRouter.post('/login', async (req, res) => {
   res.status(200).send({ token, user })
 })
 
+=======
+>>>>>>> 8325f8ade864eee6e7af0bc46d995d5e52c6960b
 
 // delete an user
 userRouter.delete('/:id', async (req, res) => {  

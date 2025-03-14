@@ -14,6 +14,10 @@
       "role": [
         "driver"
       ],
+<<<<<<< HEAD
+=======
+      "distance": 105000,
+>>>>>>> 8325f8ade864eee6e7af0bc46d995d5e52c6960b
       "drivers": [],
       "passengers": []
     },
@@ -32,6 +36,10 @@
         "driver",
         "passenger"
       ],
+<<<<<<< HEAD
+=======
+      "distance": 54300,
+>>>>>>> 8325f8ade864eee6e7af0bc46d995d5e52c6960b
       "drivers": [],
       "passengers": []
     },
@@ -50,6 +58,10 @@
         "driver",
         "passenger"
       ],
+<<<<<<< HEAD
+=======
+      "distance": 19600,
+>>>>>>> 8325f8ade864eee6e7af0bc46d995d5e52c6960b
       "drivers": [],
       "passengers": []
     },
@@ -68,6 +80,10 @@
         "driver",
         "passenger"
       ],
+<<<<<<< HEAD
+=======
+      "distance": 13600,
+>>>>>>> 8325f8ade864eee6e7af0bc46d995d5e52c6960b
       "drivers": [],
       "passengers": []
     },
@@ -85,6 +101,10 @@
         "driver",
         "passenger"
       ],
+<<<<<<< HEAD
+=======
+      "distance": 13600,
+>>>>>>> 8325f8ade864eee6e7af0bc46d995d5e52c6960b
       "drivers": [
         "sepi",
         "leka"
